@@ -1,1 +1,1 @@
-# altschool-3rd-semester-exam
+# altschool-final-exam
