@@ -1,0 +1,51 @@
+   pipeline{
+         agent any
+         environment {
+              AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+              AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+              AWS_DEFAULT_REGION = "us-east-1"
+         }
+
+
+
+        parameters{
+        choice(name: 'ENVIRONMENT', choices: ['create', 'destroy'], description: 'create and destroy')
+    }
+
+
+         stages {
+
+              stage("Create EKS Cluster") {
+
+                when {
+                  expression { params.ENVIRONMENT == 'create' }
+            }
+
+                steps {
+                     script {
+                         dir('cluster-config') {
+                        sh "terraform init"
+                        sh "terraform apply -auto-approve"
+                    }
+                     }
+                }
+              }
+         }
+
+
+
+
+       stage("destroy EKS Cluster") {
+            when {
+                expression { params.ENVIRONMENT == 'destroy' }
+            }
+            steps {
+                script {
+                    dir('cluster-config') {
+                        sh "terraform destroy -auto-approve"
+                    }
+                }
+            }
+        }
+    }
+}
