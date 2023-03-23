@@ -35,17 +35,17 @@
 
 
 
-       stage("destroy EKS Cluster") {
-            when {
-                expression { params.ENVIRONMENT == 'destroy' }
-            }
-            steps {
-                script {
-                    dir('Terraform') {
-                        sh "terraform destroy -auto-approve"
-                    }
-                }
-            }
-        }
+#       stage("destroy EKS Cluster") {
+#            when {
+#                expression { params.ENVIRONMENT == 'destroy' }
+#            }
+#            steps {
+#                script {
+#                    dir('Terraform') {
+#                        sh "terraform destroy -auto-approve"
+#                    }
+#                }
+#            }
+#        }
     }
 
