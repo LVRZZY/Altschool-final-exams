@@ -23,7 +23,7 @@
 
                 steps {
                      script {
-                         dir('cluster-config') {
+                         dir('Terraform') {
                         sh "terraform init"
                         sh "terraform apply -auto-approve"
                     }
@@ -41,7 +41,7 @@
             }
             steps {
                 script {
-                    dir('cluster-config') {
+                    dir('Terraform') {
                         sh "terraform destroy -auto-approve"
                     }
                 }
