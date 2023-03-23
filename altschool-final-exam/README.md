@@ -1,1 +1,0 @@
-# altschool-final-exam
